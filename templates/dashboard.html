@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Welcome {{ session.username|capitalize }}</h1>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Website</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for password in passwords %}
+        <tr>
+            <td>{{ password.website }}</td>
+            <td>{{ password.username }}</td>
+            <td>
+                <input type="password" class="form-control" value="{{ password.password }}" id="password-{{ loop.index }}" readonly>
+                <button class="btn btn-sm btn-secondary" onclick="togglePasswordVisibility('password-{{ loop.index }}')">Show/Hide</button>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-primary" onclick="copyToClipboard('password-{{ loop.index }}')">Copy</button>
+                <a href="{{ url_for('edit', index=password.index) }}" class="btn btn-sm btn-warning">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('add') }}" class="btn btn-success">Add New Password</a>
+<a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+<script>
+    function copyToClipboard(elementId) {
+        var copyText = document.getElementById(elementId);
+        copyText.type = 'text'; // Temporarily change to text to select value
+        copyText.select();
+        document.execCommand("copy");
+        copyText.type = 'password'; // Change back to password
+        alert("Copied the password: " + copyText.value);
+    }
+
+    function togglePasswordVisibility(elementId) {
+        var input = document.getElementById(elementId);
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    }
+</script>
+{% endblock %}

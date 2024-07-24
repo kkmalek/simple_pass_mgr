@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get Password</title>
+</head>
+<body>
+    <h1>Get Password</h1>
+    <form method="POST">
+        <label for="website">Website:</label>
+        <input type="text" id="website" name="website" required><br><br>
+        <button type="submit">Get Password</button>
+    </form>
+    {% if password %}
+    <p>Password: {{ password }}</p>
+    {% endif %}
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>
