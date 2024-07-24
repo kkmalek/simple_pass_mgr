@@ -11,8 +11,8 @@ To run in debug mode:
     ```
 2. Create and Activate venv<br/>
     ```bash
+    cd simple_pass_mgr
     python3 -m venv .venv
-    cd simple_pass_mgr 
     source .venv/bin/activate
     ```
 3. Install requirements<br/> 
