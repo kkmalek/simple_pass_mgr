@@ -1,3 +1,8 @@
+# app files
+encryption_key.key
+user_data.json
+passwords.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
